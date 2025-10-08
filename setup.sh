@@ -7,7 +7,7 @@ if [[ $EUID -ne 0 ]]; then
     exit 1
 fi 
 
-LOGILE="./logs/setup-$(date +%F).log"
+LOGFILE="./logs/setup-$(date +%F).log"
 mkdir -p ./logs 
 
 log() {
@@ -17,13 +17,13 @@ log() {
 set_hostname() {
     local new_hostname="my-linux-machine"
     log "Setting hostname to $new_hostname"
-    hostenamectl set-hostname "$new_hostname"
+    hostnamectl set-hostname "$new_hostname"
 }
 
 set_timezone() {
     local timezone="America/New_York"
     log "Setting timezone to $timezone"
-    timedatectl set-time "$timezone"
+    timedatectl set-timezone "$timezone"
 }
 
 install_packages() {
