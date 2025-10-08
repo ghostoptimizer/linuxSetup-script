@@ -1,0 +1,29 @@
+name: Bash Lint & Validate
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  lint-and-validate:
+    name: Lint & Validate Bash Scripts
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up ShellCheck
+        uses: ludeeus/action-shellcheck@v2
+
+      - name: Run ShellCheck
+        run: |
+          echo "🔍 Running ShellCheck..."
+          shellcheck setup.sh
+
+      - name: Bash syntax check
+        run: |
+          echo "🔧 Validating with bash -n..."
+          bash -n setup.sh
